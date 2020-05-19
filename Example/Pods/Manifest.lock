@@ -1,0 +1,16 @@
+PODS:
+  - MoyaLaconicPlugin (0.1.0)
+
+DEPENDENCIES:
+  - MoyaLaconicPlugin (from `../`)
+
+EXTERNAL SOURCES:
+  MoyaLaconicPlugin:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  MoyaLaconicPlugin: 89cb4ced7026d8f5c5aa96c872d4ccce42e0feb6
+
+PODFILE CHECKSUM: 10ab38414386bd514a44ea12290bef443c96c4f1
+
+COCOAPODS: 1.9.1

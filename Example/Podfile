@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'MoyaLaconicPlugin_Example' do
+  pod 'MoyaLaconicPlugin', :path => '../'
+
+  target 'MoyaLaconicPlugin_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

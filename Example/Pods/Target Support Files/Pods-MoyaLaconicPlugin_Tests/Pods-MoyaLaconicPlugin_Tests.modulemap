@@ -1,0 +1,6 @@
+framework module Pods_MoyaLaconicPlugin_Tests {
+  umbrella header "Pods-MoyaLaconicPlugin_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
