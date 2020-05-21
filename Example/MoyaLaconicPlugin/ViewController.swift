@@ -7,17 +7,24 @@
 //
 
 import UIKit
+import Moya
+import MoyaLaconicPlugin
 
 class ViewController: UIViewController {
+
+    let provider: MoyaProvider<MultiTarget>
+
+    required init?(coder: NSCoder) {
+        provider = MoyaProvider<MultiTarget>(plugins: [
+            LaconicPlugin()
+            ])
+        super.init(coder: coder)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        provider.request(MultiTarget.target(LastfmTarget.friends(user: "ok_not_ok_", limit: 10)), completion: { _ in })
     }
 
 }
