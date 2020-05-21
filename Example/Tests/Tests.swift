@@ -1,28 +1,33 @@
 import XCTest
-import MoyaLaconicPlugin
+@testable import MoyaLaconicPlugin
+import Moya
 
 class Tests: XCTestCase {
-    
+
+    let successResponse = Response(statusCode: 200, data: "".data(using: .utf8)!)
+
+    let plugin: LaconicPlugin = {
+        let plugin = LaconicPlugin()
+        return plugin
+    }()
+
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
+    func testSuccessResponse() {
+        let result: Result<Response, MoyaError> = .success(successResponse)
+        XCTAssertEqual(plugin.responseDescription(result: result), "💭🔙✅ 200")
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure() {
-            // Put the code you want to measure the time of here.
-        }
+
+    func testFailureResponse() {
+        let result: Result<Response, MoyaError> = .failure(.requestMapping("map-err"))
+        XCTAssertEqual(plugin.responseDescription(result: result), "💭🔙❌ Failed to map Endpoint to a URLRequest.")
     }
-    
+
 }
+

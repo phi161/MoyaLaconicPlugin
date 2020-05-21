@@ -28,21 +28,29 @@ public struct LaconicPlugin {
         self.failureIdentifier = failureIdentifier
     }
 
+    func requestDescription(request: RequestType) -> String {
+        return "\(pluginIdentifier)\(requestIdentifier)"
+    }
+
+    func responseDescription(result: Result<Response, MoyaError>) -> String {
+        switch result {
+        case .success(let response):
+            return "\(pluginIdentifier)\(responseIdentifier)\(successIdentifier) \(response.statusCode)"
+        case .failure(let error):
+            return "\(pluginIdentifier)\(responseIdentifier)\(failureIdentifier) \(error.localizedDescription)"
+        }
+    }
+
 }
 
 extension LaconicPlugin: PluginType {
 
     public func willSend(_ request: RequestType, target: TargetType) {
-        print("\(pluginIdentifier)\(requestIdentifier)")
+        print(requestDescription(request: request))
     }
 
     public func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
-        switch result {
-        case .success(let response):
-            print("\(pluginIdentifier)\(responseIdentifier)\(successIdentifier) \(response.statusCode)")
-        case .failure(let error):
-            print("\(pluginIdentifier)\(responseIdentifier)\(failureIdentifier) \(error.localizedDescription)")
-        }
+        print(responseDescription(result: result))
     }
 
 }
