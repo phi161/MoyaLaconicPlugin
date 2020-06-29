@@ -18,16 +18,45 @@ class Tests: XCTestCase {
     override func tearDown() {
         super.tearDown()
     }
+
+    func testRequestDescription() {
+        let mockRequest = MockRequest()
+        XCTAssertEqual(plugin.requestDescription(request: mockRequest), "💭🔜")
+    }
     
-    func testSuccessResponse() {
+    func testSuccessResponseDescription() {
         let result: Result<Response, MoyaError> = .success(successResponse)
         XCTAssertEqual(plugin.responseDescription(result: result), "💭🔙✅ 200")
     }
 
-    func testFailureResponse() {
+    func testFailureResponseDescription() {
         let result: Result<Response, MoyaError> = .failure(.requestMapping("map-err"))
         XCTAssertEqual(plugin.responseDescription(result: result), "💭🔙❌ Failed to map Endpoint to a URLRequest.")
     }
 
 }
 
+
+struct MockRequest: RequestType {
+
+    var request: URLRequest? {
+        return nil
+    }
+
+    var sessionHeaders: [String : String] {
+        return [:]
+    }
+
+    func authenticate(username: String, password: String, persistence: URLCredential.Persistence) -> MockRequest {
+        return self
+    }
+
+    func authenticate(with credential: URLCredential) -> MockRequest {
+        return self
+    }
+
+    func cURLDescription(calling handler: @escaping (String) -> Void) -> MockRequest {
+        return self
+    }
+
+}
