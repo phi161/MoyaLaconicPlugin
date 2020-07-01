@@ -15,6 +15,7 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		CF35BA67247485B80016FF15 /* LastfmTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF35BA66247485B80016FF15 /* LastfmTarget.swift */; };
+		CF7E23E424AD1EB8002B4ECB /* HTTPCatTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7E23E324AD1EB8002B4ECB /* HTTPCatTarget.swift */; };
 		DD9169A3C3306B56E473CE75 /* Pods_MoyaLaconicPlugin_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E07165CEDDC4BD84467F5535 /* Pods_MoyaLaconicPlugin_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		A54782B72C4894D26DA5E95A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		BCE54D56BA66F062DDD9C3E0 /* Pods-MoyaLaconicPlugin_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoyaLaconicPlugin_Tests.debug.xcconfig"; path = "Target Support Files/Pods-MoyaLaconicPlugin_Tests/Pods-MoyaLaconicPlugin_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		CF35BA66247485B80016FF15 /* LastfmTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastfmTarget.swift; sourceTree = "<group>"; };
+		CF7E23E324AD1EB8002B4ECB /* HTTPCatTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPCatTarget.swift; sourceTree = "<group>"; };
 		E07165CEDDC4BD84467F5535 /* Pods_MoyaLaconicPlugin_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoyaLaconicPlugin_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6E3F8B74D49191AC9CF37CA /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F72835A0CF8D0D1EE6A8D1D2 /* MoyaLaconicPlugin.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MoyaLaconicPlugin.podspec; path = ../MoyaLaconicPlugin.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -107,6 +109,7 @@
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				CF35BA66247485B80016FF15 /* LastfmTarget.swift */,
+				CF7E23E324AD1EB8002B4ECB /* HTTPCatTarget.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -338,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				CF7E23E424AD1EB8002B4ECB /* HTTPCatTarget.swift in Sources */,
 				CF35BA67247485B80016FF15 /* LastfmTarget.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
