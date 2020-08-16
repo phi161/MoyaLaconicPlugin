@@ -6,36 +6,75 @@ class Tests: XCTestCase {
 
     let successResponse = Response(statusCode: 200, data: "".data(using: .utf8)!)
 
-    let plugin: LaconicPlugin = {
-        let plugin = LaconicPlugin()
-        return plugin
-    }()
+    let defaultPlugin = LaconicPlugin()
+    let customPlugin = LaconicPlugin(pluginIdentifier: "*️⃣", requestIdentifier: "➡️", responseIdentifier: "⬅️", successIdentifier: "🆗", failureIdentifier: "🆖")
 
-    override func setUp() {
-        super.setUp()
-    }
-    
-    override func tearDown() {
-        super.tearDown()
-    }
-
-    func testRequestDescription() {
+    func testLaconicTargetRequestDescriptionWithDefaultPlugin() {
         let mockRequest = MockRequest()
-        XCTAssertEqual(plugin.requestDescription(request: mockRequest), "💭🔜")
+        XCTAssertEqual(defaultPlugin.requestDescription(request: mockRequest, laconic: MockTarget()), "💭🅰️🔜🅱️")
     }
-    
-    func testSuccessResponseDescription() {
+
+    func testLaconicTargetSuccessResponseDescriptionWithDefaultPlugin() {
         let result: Result<Response, MoyaError> = .success(successResponse)
-        XCTAssertEqual(plugin.responseDescription(result: result), "💭🔙✅ 200")
+        XCTAssertEqual(defaultPlugin.responseDescription(result: result, laconic: MockTarget()), "💭🅰️🔙✅🅱️ (HTTP 200)")
     }
 
-    func testFailureResponseDescription() {
-        let result: Result<Response, MoyaError> = .failure(.requestMapping("map-err"))
-        XCTAssertEqual(plugin.responseDescription(result: result), "💭🔙❌ Failed to map Endpoint to a URLRequest.")
+    func testLaconicTargetFailureResponseDescriptionWithDefaultPlugin() {
+        let result: Result<Response, MoyaError> = .failure(.requestMapping(""))
+        XCTAssertEqual(defaultPlugin.responseDescription(result: result, laconic: MockTarget()), "💭🅰️🔙❌🅱️ Failed to map Endpoint to a URLRequest.")
     }
 
+    func testNonLaconicTargetRequestDescriptionWithDefaultPlugin() {
+        let mockRequest = MockRequest()
+        XCTAssertEqual(defaultPlugin.requestDescription(request: mockRequest, laconic: nil), "💭🔜")
+    }
+
+    func testNonLaconicTargetSuccessResponseDescriptionWithDefaultPlugin() {
+        let result: Result<Response, MoyaError> = .success(successResponse)
+        XCTAssertEqual(defaultPlugin.responseDescription(result: result, laconic: nil), "💭🔙✅ (HTTP 200)")
+    }
+
+    func testNonLaconicTargetFailureResponseDescriptionWithDefaultPlugin() {
+        let result: Result<Response, MoyaError> = .failure(.requestMapping(""))
+        XCTAssertEqual(defaultPlugin.responseDescription(result: result, laconic: nil), "💭🔙❌ Failed to map Endpoint to a URLRequest.")
+    }
+
+    func testLaconicTargetRequestDescriptionWithCustomPlugin() {
+        let mockRequest = MockRequest()
+        XCTAssertEqual(customPlugin.requestDescription(request: mockRequest, laconic: MockTarget()), "*️⃣🅰️➡️🅱️")
+    }
+
+    func testLaconicTargetSuccessResponseDescriptionWithCustomPlugin() {
+        let result: Result<Response, MoyaError> = .success(successResponse)
+        XCTAssertEqual(customPlugin.responseDescription(result: result, laconic: MockTarget()), "*️⃣🅰️⬅️🆗🅱️ (HTTP 200)")
+    }
+
+    func testLaconicTargetFailureResponseDescriptionWithCustomPlugin() {
+        let result: Result<Response, MoyaError> = .failure(.requestMapping(""))
+        XCTAssertEqual(customPlugin.responseDescription(result: result, laconic: MockTarget()), "*️⃣🅰️⬅️🆖🅱️ Failed to map Endpoint to a URLRequest.")
+    }
+
+    func testNonLaconicTargetRequestDescriptionWithCustomPlugin() {
+        let mockRequest = MockRequest()
+        XCTAssertEqual(customPlugin.requestDescription(request: mockRequest, laconic: nil), "*️⃣➡️")
+    }
+
+    func testNonLaconicTargetSuccessResponseDescriptionWithCustomPlugin() {
+        let result: Result<Response, MoyaError> = .success(successResponse)
+        XCTAssertEqual(customPlugin.responseDescription(result: result, laconic: nil), "*️⃣⬅️🆗 (HTTP 200)")
+    }
+
+    func testNonLaconicTargetFailureResponseDescriptionWithCustomPlugin() {
+        let result: Result<Response, MoyaError> = .failure(.requestMapping(""))
+        XCTAssertEqual(customPlugin.responseDescription(result: result, laconic: nil), "*️⃣⬅️🆖 Failed to map Endpoint to a URLRequest.")
+    }
 }
 
+
+struct MockTarget: Laconic {
+    var primaryIdentifier = "🅰️"
+    var secondaryIdentifier = "🅱️"
+}
 
 struct MockRequest: RequestType {
 

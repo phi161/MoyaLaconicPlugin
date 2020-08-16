@@ -28,16 +28,29 @@ public struct LaconicPlugin {
         self.failureIdentifier = failureIdentifier
     }
 
-    func requestDescription(request: RequestType) -> String {
-        return "\(pluginIdentifier)\(requestIdentifier)"
+    func requestDescription(request: RequestType, laconic: Laconic?) -> String {
+        if let laconic = laconic {
+            return "\(pluginIdentifier)\(laconic.primaryIdentifier)\(requestIdentifier)\(laconic.secondaryIdentifier)"
+        } else {
+            return "\(pluginIdentifier)\(requestIdentifier)"
+        }
     }
 
-    func responseDescription(result: Result<Response, MoyaError>) -> String {
-        switch result {
-        case .success(let response):
-            return "\(pluginIdentifier)\(responseIdentifier)\(successIdentifier) \(response.statusCode)"
-        case .failure(let error):
-            return "\(pluginIdentifier)\(responseIdentifier)\(failureIdentifier) \(error.localizedDescription)"
+    func responseDescription(result: Result<Response, MoyaError>, laconic: Laconic?) -> String {
+        if let laconic = laconic {
+            switch result {
+            case .success(let response):
+                return "\(pluginIdentifier)\(laconic.primaryIdentifier)\(responseIdentifier)\(successIdentifier)\(laconic.secondaryIdentifier) (HTTP \(response.statusCode))"
+            case .failure(let error):
+                return "\(pluginIdentifier)\(laconic.primaryIdentifier)\(responseIdentifier)\(failureIdentifier)\(laconic.secondaryIdentifier) \(error.localizedDescription)"
+            }
+        } else {
+            switch result {
+            case .success(let response):
+                return "\(pluginIdentifier)\(responseIdentifier)\(successIdentifier) (HTTP \(response.statusCode))"
+            case .failure(let error):
+                return "\(pluginIdentifier)\(responseIdentifier)\(failureIdentifier) \(error.localizedDescription)"
+            }
         }
     }
 
@@ -46,11 +59,11 @@ public struct LaconicPlugin {
 extension LaconicPlugin: PluginType {
 
     public func willSend(_ request: RequestType, target: TargetType) {
-        print(requestDescription(request: request))
+        print(requestDescription(request: request, laconic: target.laconic))
     }
 
     public func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
-        print(responseDescription(result: result))
+        print(responseDescription(result: result, laconic: target.laconic))
     }
 
 }
