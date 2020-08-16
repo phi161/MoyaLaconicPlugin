@@ -1,16 +1,29 @@
 PODS:
-  - MoyaLaconicPlugin (0.1.0)
+  - Alamofire (5.1.0)
+  - Moya (14.0.0):
+    - Moya/Core (= 14.0.0)
+  - Moya/Core (14.0.0):
+    - Alamofire (~> 5.0)
+  - MoyaLaconicPlugin (0.1.0):
+    - Moya (~> 14.0)
 
 DEPENDENCIES:
   - MoyaLaconicPlugin (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - Moya
 
 EXTERNAL SOURCES:
   MoyaLaconicPlugin:
     :path: "../"
 
 SPEC CHECKSUMS:
-  MoyaLaconicPlugin: 89cb4ced7026d8f5c5aa96c872d4ccce42e0feb6
+  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
+  MoyaLaconicPlugin: 12f126e491cc9272a348cbcf6eff094a9b2d8035
 
-PODFILE CHECKSUM: 10ab38414386bd514a44ea12290bef443c96c4f1
+PODFILE CHECKSUM: 02c02f046eb0b5bba4f041604a75f9d83b4e9be6
 
 COCOAPODS: 1.9.1
