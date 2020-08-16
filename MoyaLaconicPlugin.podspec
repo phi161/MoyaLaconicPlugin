@@ -2,23 +2,14 @@
 # Be sure to run `pod lib lint MoyaLaconicPlugin.podspec' to ensure this is a
 # valid spec before submitting.
 #
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see https://guides.cocoapods.org/syntax/podspec.html
-#
 
 Pod::Spec.new do |s|
   s.name             = 'MoyaLaconicPlugin'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of MoyaLaconicPlugin.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-
+  s.summary          = 'A Moya plugin for one-line logs.'
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+  MoyaLaconicPlugin logs your Moya requests and their responses using a short message for each.
+  In an application with many requests, sometimes is enough to just know when a request is fired and when its response comes back. Implement the Laconic protocol and assign an identifier to your endpoints. MoyaLaconicPlugin will use these and log in the Console a one-line message, together with the status code of each response.
                        DESC
 
   s.homepage         = 'https://github.com/phi161/MoyaLaconicPlugin'
@@ -26,17 +17,10 @@ TODO: Add long description of the pod here.
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'phi161' => 'phi@magneticpull.org' }
   s.source           = { :git => 'https://github.com/phi161/MoyaLaconicPlugin.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
+  s.swift_version = '5.0'
   s.ios.deployment_target = '10.0'
 
   s.source_files = 'MoyaLaconicPlugin/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'MoyaLaconicPlugin' => ['MoyaLaconicPlugin/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'Moya', '~> 14.0'
 end
