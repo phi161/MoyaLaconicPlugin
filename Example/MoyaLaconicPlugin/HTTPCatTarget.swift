@@ -8,12 +8,26 @@
 
 import Foundation
 import Moya
+import MoyaLaconicPlugin
 
 enum HTTPCatTarget {
     case catOk
     case catNotFound
 }
 
+extension HTTPCatTarget: Laconic {
+    var primaryIdentifier: String {
+        return "🐈"
+    }
+    var secondaryIdentifier: String {
+        switch self {
+        case .catOk:
+            return "😸"
+        case .catNotFound:
+            return "😿"
+        }
+    }
+}
 
 extension HTTPCatTarget: TargetType {
 

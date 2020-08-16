@@ -8,19 +8,32 @@
 
 import Foundation
 import Moya
+import MoyaLaconicPlugin
 
 enum LastfmTarget {
     case topTracks(user: String, limit: Int)
     case friends(user: String, limit: Int)
+}
 
-    private func stubbedResponse(_ filename: String) -> Data {
-        let path = Bundle.main.path(forResource: filename, ofType: "json")
-        return (try! Data(contentsOf: URL(fileURLWithPath: path!)))
+extension LastfmTarget: Laconic {
+
+    var primaryIdentifier: String {
+        return "👨🏻‍🎤"
+    }
+
+    var secondaryIdentifier: String {
+        switch self {
+        case .friends(let user, _):
+            return user
+        case .topTracks:
+            return "top tracks"
+        }
     }
 
 }
 
 extension LastfmTarget: TargetType {
+
     var baseURL: URL {
         return URL(string: "https://ws.audioscrobbler.com")!
     }
@@ -55,12 +68,7 @@ extension LastfmTarget: TargetType {
     }
     
     var sampleData: Data {
-        switch self {
-        case .topTracks:
-            return stubbedResponse("topTracks")
-        case .friends:
-            return stubbedResponse("friends")
-        }
+        return "".data(using: .utf8)!
     }
     
 }
